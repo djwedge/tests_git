@@ -1,2 +1,2 @@
 # tests_git
-Tests de git, turbolol !
+Tests de git, mais oui c'est clair !
