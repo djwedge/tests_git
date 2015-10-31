@@ -20,7 +20,16 @@
             var filetLargeur = 6;
             var couleurTerrain = "#000000";
             var couleurFilet = "#FFFFFF";
-                        
+            
+            var canvasScoreContext;
+            var scoreJoueur = 0;
+            var scoreJoueur2 = 0;            
+            var couleurScore = "#FFFFFF";
+            var positionXScoreJoueur1 = 330;
+            var positionYScoreJoueur1 = 50;
+            var positionXScoreJoueur2 = 435;
+            var positionYScoreJoueur2 = 50;
+            
             var canvasRaquettesContext;
             var largeurRaquette = 20;
             var longueurRaquette = 70;
@@ -60,6 +69,15 @@
             {
                 canvasRaquettesContext.fillStyle = couleurRaquette;
                 canvasRaquettesContext.fillRect(positionXBalle, positionYBalle, largeurBalle, largeurBalle);
+            }
+            
+            var afficherScore = function(scoreJoueur1, scoreJoueur2)
+            {
+                canvasScoreContext.clearRect(0, 0, terrainLongueur, terrainLargeur); // /!\ Sinon réécrit pardessus ! Motherfucker !!
+                canvasScoreContext.font = "50px serif";
+                canvasScoreContext.fillStyle = couleurScore;
+                canvasScoreContext.fillText(scoreJoueur1, positionXScoreJoueur1, positionYScoreJoueur1);
+                canvasScoreContext.fillText(scoreJoueur2, positionXScoreJoueur2, positionYScoreJoueur2);
             }
             
             var animerBalle = function()
@@ -280,11 +298,15 @@
             {
                 if (ballePerdueJoueur(positionXBalle, positionXRaquetteA))
                 {
+                    scoreJoueur2++;
+                    afficherScore(scoreJoueur, scoreJoueur2);
                     echangeEnCours = false;
                     joueurQuiEngage = 1;
                 }
                 if (ballePerdueJ2(positionXBalle, positionXRaquetteB))
                 {
+                    scoreJoueur++;
+                    afficherScore(scoreJoueur, scoreJoueur2);
                     echangeEnCours = false;
                     joueurQuiEngage = 2;
                 }
@@ -293,10 +315,12 @@
             var initialisation = function()
             {
                 canvasTerrainContext = creerCanvasContext("canvasTerrain", terrainLongueur, terrainLargeur, 1, couleurTerrain);
+                canvasScoreContext = creerCanvasContext("canvasScore", terrainLongueur, terrainLargeur, 2);
                 canvasRaquettesContext = creerCanvasContext("canvasRaquettes", terrainLongueur, terrainLargeur, 3);
                 dessinerTerrain();
                 dessinerRaquettes();
                 dessinerBalle();
+                afficherScore(0, 0);
                 setInterval(accelererBalle, 5000);
                 
                 requestAnimId = window.requestAnimationFrame(principale);
