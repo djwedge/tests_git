@@ -1,4 +1,7 @@
 # tests_git
+
+lien du tuto suivi :http://www.webtutoriaux.com/tutoriel-315-html-creer-le-jeu-pong-en-html5-et-javascript.html
+
 Ce projet consiste à développer un jeu similaire à Pong en Javascript.
 Voici les principaux axes à améliorer :
 - Un mode 2 joueurs fonctionnel (raquettes répondant aux commandes et renvoyant la balle) - OK
